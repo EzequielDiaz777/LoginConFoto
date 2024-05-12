@@ -85,7 +85,7 @@ public class RegistroActivityViewModel extends AndroidViewModel {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap bitmap = (Bitmap) extras.get("data");
-            bitmap = rotateBitmapIfRequired(bitmap);
+            bitmap = rotarFoto(bitmap);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
             byte [] b = baos.toByteArray();
@@ -106,7 +106,7 @@ public class RegistroActivityViewModel extends AndroidViewModel {
         }
     }
 
-    private Bitmap rotateBitmapIfRequired(Bitmap bitmap) {
+    private Bitmap rotarFoto(Bitmap bitmap) {
         Matrix matrix = new Matrix();
         matrix.postRotate(270);
         bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
